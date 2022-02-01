@@ -1,0 +1,50 @@
+class Solution {
+private:
+    bool checkEqual(int a[26],int b[26]){
+        for(int i=0;i<26;i++){
+            if(a[i]!=b[i])
+                return 0;
+        }
+        return 1;
+    }
+public:
+    bool checkInclusion(string s1, string s2) {
+        int a[26]={0};
+        int count=0;
+        for(int i=0;i<s1.length();i++){
+            count=s1[i]-'a';
+            a[count]++;
+        }
+        int i=0;
+        int windowsize=s1.length();
+        int b[26]={0};
+        while(i<windowsize && i<s2.length()){
+            int count=s2[i]-'a';
+            b[count]++;
+            i++;
+        }
+        if(checkEqual(a,b))
+            return 1;
+   
+        
+        while(i<s2.length()){
+            int count=s2[i]-'a';
+            b[count]++;
+             count=s2[i-windowsize]-'a';
+            b[count]--;
+            
+            i++;
+            if(checkEqual(a,b))
+                  return 1;
+            
+            
+         
+        }
+       
+         
+      
+        return 0;
+        
+    }
+   
+};
